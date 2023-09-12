@@ -1,1 +1,1 @@
-#Javascript wheel 
+# Javascript spinning wheel 
