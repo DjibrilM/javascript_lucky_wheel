@@ -1,1 +1,1 @@
-# javascript_lucky_wheel
+#Javascript wheel 
