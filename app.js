@@ -1,10 +1,13 @@
 const wheel = document.querySelector(".wheel");
-const spinButton = document.querySelector(".spinBtn");
+const result = document.querySelector('.result-container');
+const playbutton = document.querySelector(".playButton");
 const angle_ref = document.querySelectorAll(".angle_ref");
 const parentEl = document.querySelector(".container");
 let rotationVlaue = Math.floor(Math.random() * 16 + 16) * 45; // this formula provide random angle rotation between 720deg and 1395
 
 const rotate = () => {
+    playbutton.disabled = true;
+    playbutton.innerHTML = '. . .'
     wheel.style.transform = `rotate(${rotationVlaue}deg)`;
     rotationVlaue += Math.floor(Math.random() * 16 + 16) * 45;
 };
@@ -25,24 +28,26 @@ function getElementAngle(element) {
         angle += 360;
     }
 
+    playbutton.disabled = false;
+    playbutton.innerHTML = 'Play'
     return angle;
 }
 
 
-const getChosenElement = () => {
+const outputResult = () => {
     angle_ref.forEach((angleref) => {
         const getangle = getElementAngle(angleref);
-        const percentage = angleref.parentElement.querySelector("span");
+        const percentage = angleref.parentElement.querySelector("span").innerHTML;
 
         if (parseFloat(getangle.toFixed(0)) === 270) {
-            alert(percentage.innerHTML);
+            result.querySelector("h1").querySelector('span').innerHTML = percentage;
         }
-    })
+    });
 }
 
 
 //start the spinning 
-spinButton.addEventListener('click', () => rotate())
+playbutton.addEventListener('click', () => rotate())
 //check which element was chosen at the end of the game 
-wheel.addEventListener("transitionend", () => getChosenElement())
+wheel.addEventListener("transitionend", () => outputResult())
 
